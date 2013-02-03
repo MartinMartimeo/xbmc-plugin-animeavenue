@@ -28,6 +28,10 @@ def run(aa, tag=None, type=None, episode=None):
             episode = type
             type = "episode"
         ts = StreamScanner(tag, type, episode)
-
+        streams = ts.run()
+        if streams:
+            aa.resolveUrl(streams[0])
+        else:
+            aa.failResolve()
 
 

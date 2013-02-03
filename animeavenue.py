@@ -80,6 +80,23 @@ class AnimeAvenue(object):
         for tag in ["latest_episodes", "anime_suggestions", "ongoing_series", "anime_list", "genres"]:
             self.addDirectory(tag, strings[tag])
 
+    def resolveUrl(self, url):
+        """
+            Play Video
+        """
+        listitem = xbmcgui.ListItem(path=url)
+        xbmcplugin.setResolvedUrl(handle=int(sys.argv[1]), succeeded=True, listitem=listitem)
+
+    def failResolve(self):
+        """
+            Just fail :(
+        """
+        xbmcplugin.setResolvedUrl(handle=int(sys.argv[1]), succeeded=False)
+
+
+
+
+
 
 aa = AnimeAvenue()
 folder = params.get("folder")
