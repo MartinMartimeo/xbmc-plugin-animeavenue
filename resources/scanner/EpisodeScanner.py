@@ -34,6 +34,6 @@ class EpisodeScanner(BasicScanner):
 
 
 if __name__ == "__main__":
-    gs = EpisodeScanner("onii-chan-dakedo-ai-sae-areba-kankeinai-yo-ne")
+    gs = EpisodeScanner("da-capo-iii")
     animes = gs.run()
     print "%s" % animes
