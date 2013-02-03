@@ -44,9 +44,8 @@ class AnimeAvenue(object):
         """
             Shows the Items in Root Directory
         """
-        for tag in ["latest_episodes", "anime_suggestions", "ongoing_series", "anime_list", "gernes"]:
+        for tag in ["latest_episodes", "anime_suggestions", "ongoing_series", "anime_list", "genres"]:
             self.addDirectory(tag, strings[tag])
-
 
 
 aa = AnimeAvenue()
