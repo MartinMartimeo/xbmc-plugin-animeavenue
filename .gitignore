@@ -2,5 +2,5 @@
 .idea
 
 # Python
-.pyc
-.pyo
+*.pyc
+*.pyo
