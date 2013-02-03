@@ -15,8 +15,11 @@ import xbmc, xbmcplugin, xbmcgui, xbmcaddon
 # -- Constants ----------------------------------------------
 ADDON_ID = 'plugin.video.animeavenue'
 
+# -- Settings -----------------------------------------------
+settings = xbmcaddon.Addon(id=ADDON_ID)
+
 # -- I18n ---------------------------------------------------
-language = xbmcaddon.Addon(id='plugin.video.tagesschau').getLocalizedString
+language = xbmcaddon.Addon(id=ADDON_ID).getLocalizedString
 strings = {'latest_episodes': language(70010),
            'anime_suggestions': language(70020),
            'ongoing_series': language(70030),
@@ -51,3 +54,4 @@ class AnimeAvenue(object):
 aa = AnimeAvenue()
 aa.showRootDirectory()
 
+xbmcplugin.endOfDirectory(int(sys.argv[1]))
