@@ -36,7 +36,10 @@ def get_params():
     for key in params:
         params[key] = params[key][0]
     return params
+
+
 params = get_params()
+
 
 class AnimeAvenue(object):
     """
@@ -45,6 +48,22 @@ class AnimeAvenue(object):
 
     def __init__(self):
         super(AnimeAvenue, self).__init__()
+
+    def addVideo(self, uri, caption, image=None):
+        """
+            Adds a Video Entry
+            :param caption: Caption to be displayed
+            :param uri: The folder uri
+            :param image: The Thumbernail Image (optional)
+        """
+        url = 'plugin://' + ADDON_ID + '/?folder=' + uri
+        if image:
+            li = xbmcgui.ListItem(caption, thumbnailImage=image)
+        else:
+            li = xbmcgui.ListItem(caption)
+        li.setProperty('IsPlayable', 'true')
+        li.setInfo(type="Video", infoLabels={"Title": caption})
+        xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]), url=url, listitem=li, isFolder=False)
 
     def addDirectory(self, folder, caption, image=None):
         """
@@ -59,6 +78,7 @@ class AnimeAvenue(object):
         else:
             li = xbmcgui.ListItem(caption)
         xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]), url=url, listitem=li, isFolder=True)
+
 
     def showFolder(self, folder):
         """
@@ -92,10 +112,6 @@ class AnimeAvenue(object):
             Just fail :(
         """
         xbmcplugin.setResolvedUrl(handle=int(sys.argv[1]), succeeded=False)
-
-
-
-
 
 
 aa = AnimeAvenue()

@@ -14,4 +14,4 @@ def run(aa):
     vs = LatestEpisodesScanner()
     animes = vs.run()
     for (tag, type, episode, anime) in animes:
-        aa.addDirectory("anime/%s/%s/%s" % (tag, type, episode), anime)
+        aa.addVideo("anime/%s/%s/%s" % (tag, type, episode), anime)

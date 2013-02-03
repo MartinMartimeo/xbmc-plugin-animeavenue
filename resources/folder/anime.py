@@ -22,7 +22,7 @@ def run(aa, tag=None, type=None, episode=None):
         vs = EpisodeScanner(tag)
         animes = vs.run()
         for (tag, type, episode, anime) in animes:
-            aa.addDirectory("anime/%s/%s/%s" % (tag, type, episode), anime)
+            aa.addVideo("anime/%s/%s/%s" % (tag, type, episode), anime)
     else:
         if not episode:
             episode = type
