@@ -23,7 +23,6 @@ class AnimeScanner(BasicScanner):
             :param content: Content from Request
         """
         rtn = []
-        print "%s" % content
         matches = self.re.findall(content)
         for img, anime, caption in matches:
             rtn.append((img, anime, caption))
@@ -32,6 +31,6 @@ class AnimeScanner(BasicScanner):
 
 
 if __name__ == "__main__":
-    vs = AnimeScanner("http://www.animeavenue.net/?genre=Tragedy")
+    vs = AnimeScanner("http://www.animeavenue.net/?genre=Adventure")
     animes = vs.run()
     print "%s" % animes
