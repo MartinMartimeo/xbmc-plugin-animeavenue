@@ -46,12 +46,18 @@ class AnimeAvenue(object):
     def __init__(self):
         super(AnimeAvenue, self).__init__()
 
-    def addDirectory(self, folder, caption):
+    def addDirectory(self, folder, caption, image=None):
         """
             Adds a Directory
+            :param caption: Caption to be displayed
+            :param folder: The folder uri
+            :param image: The Thumbernail Image (optional)
         """
         url = 'plugin://' + ADDON_ID + '/?folder=' + folder
-        li = xbmcgui.ListItem(caption)
+        if image:
+            li = xbmcgui.ListItem(caption, thumbnailImage=image)
+        else:
+            li = xbmcgui.ListItem(caption)
         xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]), url=url, listitem=li, isFolder=True)
 
     def showFolder(self, folder):

@@ -10,12 +10,12 @@ __author__ = 'MartinMartimeo <martin@martimeo.de>'
 __date__ = '03.02.13 - 10:08'
 
 
-class AnimeScanner(BasicScanner):
+class GenreAnimeScanner(BasicScanner):
 
     def __init__(self, url):
-        super(AnimeScanner, self).__init__(url)
+        super(GenreAnimeScanner, self).__init__(url)
 
-        self.re = re.compile(r'<li>[\s\n\r]*<a[\s\n\r]+href=[\'"][^\'">]+/category/([^\'">]+)/[\'"]>(.+)</a>[\s\n\r]*</li>')
+        self.re = re.compile(r'<img[\s\n\r]*src=[\'"]([^\'">]+)[\'"][\s\n\r]*></a></div><div[^\>]+><div[^\>]+>[\s\n\r]*<h4>[\s\n\r]*<strong>[\s\n\r]*<a[\s\n\r]+href=[\'"][^\'">]+/category/([^\'">]+)/[\'"]>(.+)</a>[\s\n\r]*</strong>')
 
     def parse(self, content):
         """
@@ -24,14 +24,13 @@ class AnimeScanner(BasicScanner):
         """
         rtn = []
         matches = self.re.findall(content)
-        for anime, caption in matches:
-            rtn.append((anime, caption))
-        sorted(rtn, key=lambda anime: anime[1])
+        for img, anime, caption in matches:
+            rtn.append((img, anime, caption))
         return rtn
 
 
 
 if __name__ == "__main__":
-    vs = AnimeScanner("http://www.animeavenue.net/anime-list/")
+    vs = GenreAnimeScanner("http://www.animeavenue.net/?genre=Adventure")
     animes = vs.run()
     print "%s" % animes

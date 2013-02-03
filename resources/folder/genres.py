@@ -3,7 +3,7 @@
 """
 
 """
-from resources.scanner.AnimeScanner import AnimeScanner
+from resources.scanner.GenreAnimeScanner import GenreAnimeScanner
 from resources.scanner.GenreScanner import GenreScanner
 
 __author__ = 'MartinMartimeo <martin@martimeo.de>'
@@ -19,8 +19,8 @@ def run(aa, genre=None):
         for genre in genres:
             aa.addDirectory("genres/%s" % genre, genre)
     else:
-        vs = AnimeScanner("http://www.animeavenue.net/?genre=%s" % genre)
+        vs = GenreAnimeScanner("http://www.animeavenue.net/?genre=%s" % genre)
         animes = vs.run()
-        for anime in animes:
-            vs.addDirectory("anime/%s" % anime)
+        for (img, tag, anime) in animes:
+            aa.addDirectory("anime/%s" % tag, anime, image=img)
 
