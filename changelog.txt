@@ -1,2 +1,5 @@
 version 0.9
-  * Initalisation of plugin
+  * Init of plugin
+
+version 1.0
+  * First working version with supporting mp4 streams

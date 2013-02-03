@@ -1,2 +1,10 @@
 A small Plugin for XBMC allowing to browser AnimeAvenue
 
+
+
+* Installation:
+For example zip the plugin and install it in our xbmc
+
+* Requirements:
+python-requests (apt-get install python-requests)
+
