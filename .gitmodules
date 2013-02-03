@@ -1,0 +1,3 @@
+[submodule "resources/lib/requests"]
+	path = resources/lib/requests
+	url = git://github.com/kennethreitz/requests.git/requests
