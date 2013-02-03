@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<addon
+        id="plugin.video.animeavenue"
+        version="0.9"
+        name="AnimeAvenue"
+        provider-name="Martin Martimeo">
+
+    <requires>
+        <import addon="xbmc.python" version="2.0"/>
+    </requires>
+
+    <extension point="xbmc.python.pluginsource" library="animeavenue.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <language>de</language>
+        <platform>all</platform>
+        <summary lang="de">Anime Videos von AnimeAvenue.net</summary>
+        <summary lang="en">Anime streams from AnimeAvenue.net</summary>
+        <description lang="en">
+            Provides AnimeAvenue.net browsable from your XBMC
+        </description>
+        <disclaimer lang="en">Videos from animeavenue.net</disclaimer>
+    </extension>
+</addon>
