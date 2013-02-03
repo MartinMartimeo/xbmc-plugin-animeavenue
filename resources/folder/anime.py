@@ -4,6 +4,7 @@
 
 """
 from resources.scanner.AnimeScanner import AnimeScanner
+from resources.scanner.BasicScanner import NoContentProvided
 from resources.scanner.EpisodeScanner import EpisodeScanner
 from resources.scanner.StreamScanner import StreamScanner
 
@@ -24,14 +25,18 @@ def run(aa, tag=None, type=None, episode=None):
         for (tag, type, episode, anime) in animes:
             aa.addVideo("anime/%s/%s/%s" % (tag, type, episode), anime)
     else:
-        if not episode:
-            episode = type
-            type = "episode"
-        ts = StreamScanner(tag, type, episode)
-        streams = ts.run()
-        if streams:
-            aa.resolveUrl(streams[0])
-        else:
+        try:
+            if not episode:
+                episode = type
+                type = "episode"
+            ts = StreamScanner(tag, type, episode)
+            streams = ts.run()
+            if streams:
+                aa.resolveUrl(streams[0])
+            else:
+                aa.failResolve()
+        except NoContentProvided:
             aa.failResolve()
+
 
 

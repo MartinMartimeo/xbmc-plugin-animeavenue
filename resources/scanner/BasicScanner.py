@@ -8,7 +8,8 @@ import requests
 __author__ = 'MartinMartimeo <martin@martimeo.de>'
 __date__ = '03.02.13 - 08:52'
 
-
+class NoContentProvided(Exception):
+    pass
 
 class BasicScanner(object):
 
@@ -38,4 +39,4 @@ class BasicScanner(object):
         self.fetch()
         if self.data:
             return self.data
-        raise Exception("No Content Provided")
+        raise NoContentProvided("No Content Provided")
