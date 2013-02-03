@@ -17,7 +17,7 @@ class LatestEpisodesScanner(BasicScanner):
     def __init__(self):
         super(LatestEpisodesScanner, self).__init__(URL)
 
-        self.re = re.compile(r'<div[\s\n\r]*class=[\'"]single-posts-latest-title[\'"][\s\n\r]*>[\s\n\r]*<a[\s\n\r]+href=[\'"][^\'">]+/([^\'">]+)-episode-(\d+)/[\'"][\s\n\r]+rel=[\'"]bookmark[\'"][\s\n\r]*>(.+)</a>[\s\n\r]*</div>')
+        self.re = re.compile(r'<div[\s\n\r]*class=[\'"]single-posts-latest-title[\'"][\s\n\r]*>[\s\n\r]*<a[\s\n\r]+href=[\'"][^\'">]+/([^\'">]+)-(\w+)-(\d+)/[\'"][\s\n\r]+rel=[\'"]bookmark[\'"][\s\n\r]*>(.+)</a>[\s\n\r]*</div>')
 
     def parse(self, content):
         """
@@ -26,8 +26,8 @@ class LatestEpisodesScanner(BasicScanner):
         """
         rtn = []
         matches = self.re.findall(content)
-        for tag, episode, caption in matches:
-            rtn.append((tag, episode, caption))
+        for tag, type, episode, caption in matches:
+            rtn.append((tag, type, episode, caption))
         return rtn
 
 

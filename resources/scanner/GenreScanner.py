@@ -28,6 +28,7 @@ class GenreScanner(BasicScanner):
         matches = self.re.findall(content)
         for url, genre in matches:
             rtn.append(genre)
+        rtn = sorted(rtn)
         return rtn
 
 

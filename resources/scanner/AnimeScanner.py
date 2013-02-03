@@ -26,7 +26,7 @@ class AnimeScanner(BasicScanner):
         matches = self.re.findall(content)
         for anime, caption in matches:
             rtn.append((anime, caption))
-        sorted(rtn, key=lambda anime: anime[1])
+        rtn = sorted(rtn, key=lambda anime: anime[1])
         return rtn
 
 

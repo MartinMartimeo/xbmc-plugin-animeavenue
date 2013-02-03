@@ -28,7 +28,7 @@ class OngoingAnimeScanner(BasicScanner):
         matches = self.re.findall(content)
         for tag, caption, time in matches:
             rtn.append((tag, caption, time))
-        sorted(rtn, key=lambda anime: anime[1])
+        rtn = sorted(rtn, key=lambda anime: anime[1])
         return rtn
 
 

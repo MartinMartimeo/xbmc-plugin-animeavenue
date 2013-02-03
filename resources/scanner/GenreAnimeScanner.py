@@ -26,6 +26,7 @@ class GenreAnimeScanner(BasicScanner):
         matches = self.re.findall(content)
         for img, anime, caption in matches:
             rtn.append((img, anime, caption))
+        rtn = sorted(rtn, key=lambda anime: anime[2])
         return rtn
 
 
