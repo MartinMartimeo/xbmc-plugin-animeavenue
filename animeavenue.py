@@ -62,8 +62,10 @@ class AnimeAvenue(object):
         if not args:
             return self.showRootDirectory()
         arg = args[0]
-        folder_module = __import__("resources.folder.%s" % arg)
-        folder_module.run(self, *args[1:])
+        resources_module = __import__("resources.folder.%s" % arg)
+        folder_module = getattr(resources_module, "folder")
+        arg_module = getattr(folder_module, arg)
+        arg_module.run(self, *args[1:])
 
     def showRootDirectory(self):
         """
