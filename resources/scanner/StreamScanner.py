@@ -4,7 +4,7 @@
 
 """
 import re
-from resources.scanner.BasicScanner import BasicScanner
+from resources.scanner.BasicScanner import BasicScanner, NoContentProvided
 from resources.scanner.VideoScanner import VideoScanner
 
 __author__ = 'MartinMartimeo <martin@martimeo.de>'
@@ -28,13 +28,17 @@ class StreamScanner(BasicScanner):
         matches = self.re.findall(content)
         for url in matches:
             mp = VideoScanner(url)
-            rtn.extend(mp.run())
+            # Try to add video url
+            try:
+                rtn.extend(mp.run())
+            except NoContentProvided:
+                continue
             # Just Loop until a mp4/flv/avi has been found
             if rtn:
                 break
         return rtn
 
 if __name__ == "__main__":
-    gs = StreamScanner("canaan", "episode", "2")
+    gs = StreamScanner("da-capo-iii", "episode", "6")
     iframes = gs.run()
     print "%s" % iframes
