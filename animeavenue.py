@@ -111,7 +111,7 @@ class AnimeAvenue(object):
         """
             Just fail :(
         """
-        listitem = xbmcgui.ListItem(path=None)
+        listitem = xbmcgui.ListItem(path="")
         xbmcplugin.setResolvedUrl(handle=int(sys.argv[1]), succeeded=False, listitem=listitem)
 
 
