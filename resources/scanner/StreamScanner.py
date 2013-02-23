@@ -17,7 +17,7 @@ class StreamScanner(BasicScanner):
     def __init__(self, tag, type, episode):
         super(StreamScanner, self).__init__("http://www.animeavenue.net/%s-%s-%s/" % (tag, type, episode))
 
-        self.re = re.compile(r'(?:<div[\s\n\r]*class=[\'"]entry.*[\'"].*>[\s\n\r]*<p>|<div[\s\n\r]*class=[\'"]postTabs_divs.*[\'"].*>[\s\n\r]*<span[\s\n\r]*.*>.*<br[\s\n\r]*/>)[\s\n\r]*<iframe[\s\n\r]*(?:SRC|src)=[\'"]([^\'">]+)[\'"].*>')
+        self.re = re.compile(r'(?:<div[\s\n\r]*class=[\'"]entry.*[\'"].*>[\s\n\r]*<p>|<div[\s\n\r]*class=[\'"]postTabs_divs.*[\'"].*>[\s\n\r]*<span[\s\n\r]*.*>.*(?:<br[\s\n\r]*/>)?)[\s\n\r]*<iframe[\s\n\r]*[^>]*(?:SRC|src)=[\'"]([^\'">]+)[\'"][^>]*>')
 
     def parse(self, content):
         """
@@ -39,6 +39,6 @@ class StreamScanner(BasicScanner):
         return rtn
 
 if __name__ == "__main__":
-    gs = StreamScanner("da-capo-iii", "episode", "6")
+    gs = StreamScanner("darker-than-black", "episode", "2")
     iframes = gs.run()
     print "%s" % iframes
