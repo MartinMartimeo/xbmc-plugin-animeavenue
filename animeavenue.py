@@ -28,7 +28,8 @@ strings = {'latest_episodes': language(70010),
            'anime_list': language(70040),
            'genres': language(70050),
            'name': language(10000),
-           'no_video': language(50010)}
+           'no_video': language(50010),
+           'suggestion_loading': language(50020)}
 
 
 def get_params():
@@ -130,6 +131,22 @@ class AnimeAvenue(object):
 
     def getString(self, key):
         return strings[key]
+
+    def setProgress(self, max, title):
+
+        dialog = xbmcgui.DialogProgress()
+        dialog.create(self.getString('name'), title)
+        self.progress = {"value": 0, "max": max, "dialog": dialog}
+
+    def incrProgress(self, title=None):
+
+        self.progress["value"] += 1
+        self.progress["dialog"].update(self.progress["value"] * 100 / self.progress["max"])
+
+    def closeProgress(self):
+
+        self.progress["dialog"].close()
+        self.progress = None
 
 
 aa = AnimeAvenue()

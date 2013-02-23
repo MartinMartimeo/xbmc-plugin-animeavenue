@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <strings>
     <string id="10000">AnimeAvenue</string>
-    <string id="50010">No Video could be found</string>
-    <string id="70010">Latest Episodes</string>
-    <string id="70020">Anime Suggestions</string>
-    <string id="70030">Ongoing Series</string>
-    <string id="70040">Anime List</string>
+
+    <string id="50010">Es konnte kein Video gefunden werden</string>
+    <string id="50020">Lade Vorschläge</string>
+
+    <string id="70010">Aktuelle Folgen</string>
+    <string id="70020">Vorschläges</string>
+    <string id="70030">Aktuelle Animes</string>
+    <string id="70040">Anime Liste</string>
     <string id="70050">Genres</string>
 
     <string id="70510">Adventure</string>

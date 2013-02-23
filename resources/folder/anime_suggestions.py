@@ -4,6 +4,7 @@
 
 """
 from resources.lib import storage
+from resources.scanner.EpisodeScanner import EpisodeScanner
 from resources.scanner.SuggestionScanner import SuggestionScanner
 
 __author__ = 'MartinMartimeo <martin@martimeo.de>'
@@ -15,8 +16,14 @@ def run(aa):
 
     vs = SuggestionScanner()
     animes = vs.run()
+    aa.setProgress(max=len(animes), title=aa.getString('suggestion_loading'))
     for (tag, anime, img) in animes:
-        # Image Present?
+        aa.incrProgress()
+        # Load Image
         image = storage.get(tag)
+        if not image:
+            vs = EpisodeScanner(tag)
+            image = vs.run()["thumbnail"]
         # Add List Item
         aa.addDirectory("anime/%s" % tag, anime, image=image)
+    aa.closeProgress()
