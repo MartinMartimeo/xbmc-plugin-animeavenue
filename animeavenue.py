@@ -87,7 +87,7 @@ class AnimeAvenue(object):
             li = xbmcgui.ListItem(caption, thumbnailImage=image)
         else:
             li = xbmcgui.ListItem(caption)
-        li.setInfo({'SortLetter': caption[0]})
+        li.setInfo(infoLabels={'SortLetter': caption[0]})
         xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]), url=url, listitem=li, isFolder=True)
 
 
