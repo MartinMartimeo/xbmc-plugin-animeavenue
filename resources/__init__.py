@@ -5,3 +5,5 @@
 """
 __author__ = 'MartinMartimeo <martin@martimeo.de>'
 __date__ = '03.02.13 - 08:51'
+
+ADDON_ID = 'plugin.video.animeavenue'

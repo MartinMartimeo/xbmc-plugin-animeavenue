@@ -15,7 +15,7 @@ import xbmc, xbmcplugin, xbmcgui, xbmcaddon
 # Framework based on xbmc-plugin.video.tagesschau
 
 # -- Constants ----------------------------------------------
-ADDON_ID = 'plugin.video.animeavenue'
+from resources import ADDON_ID
 
 # -- Settings -----------------------------------------------
 settings = xbmcaddon.Addon(id=ADDON_ID)

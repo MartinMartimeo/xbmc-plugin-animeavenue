@@ -3,7 +3,7 @@
 """
 
 """
-from animeavenue import ADDON_ID
+from resources import ADDON_ID
 
 __author__ = 'MartinMartimeo <martin@martimeo.de>'
 __date__ = '23.02.13 - 22:37'
