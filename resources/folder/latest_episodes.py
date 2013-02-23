@@ -15,4 +15,4 @@ def run(aa):
     animes = vs.run()
     for (tag, (type, kind), episode, anime) in animes:
         aa.addVideo("anime/%s/%s/%s" % (tag, type, episode), "%s Episode %s (%s)" % (anime, episode, kind),
-                    data={"episode": episode, "genre": "Anime (%s)" % kind, "title": anime})
+                    info={"episode": episode, "genre": "Anime (%s)" % kind, "title": anime})

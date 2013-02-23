@@ -23,7 +23,7 @@ def run(aa, tag=None, type=None, episode=None):
         animes = vs.run()
         for (tag, type, episode, anime) in animes:
             aa.addVideo("anime/%s/%s/%s" % (tag, type, episode), anime,
-                        data={"episode": episode, "genre": "Anime", "title": anime})
+                        info={"episode": episode, "genre": "Anime", "title": anime})
     else:
         try:
             if not episode:
