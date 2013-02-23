@@ -26,7 +26,9 @@ strings = {'latest_episodes': language(70010),
            'anime_suggestions': language(70020),
            'ongoing_series': language(70030),
            'anime_list': language(70040),
-           'genres': language(70050)}
+           'genres': language(70050),
+           'name': language(10000),
+           'no_video': language(50010)}
 
 
 def get_params():
@@ -49,20 +51,33 @@ class AnimeAvenue(object):
     def __init__(self):
         super(AnimeAvenue, self).__init__()
 
-    def addVideo(self, uri, caption, image=None):
+    def addVideo(self, uri, caption, image=None, label=None, info=None):
         """
             Adds a Video Entry
             :param caption: Caption to be displayed
             :param uri: The folder uri
             :param image: The Thumbernail Image (optional)
+            :param label: Additional Label (optional)
+            :param info: Additional Data passed to info (optional)
         """
         url = 'plugin://' + ADDON_ID + '/?folder=' + uri
-        if image:
+        if image and label:
+            li = xbmcgui.ListItem(caption, label, thumbnailImage=image)
+        elif image:
             li = xbmcgui.ListItem(caption, thumbnailImage=image)
+        elif label:
+            li = xbmcgui.ListItem(caption, label)
         else:
             li = xbmcgui.ListItem(caption)
         li.setProperty('IsPlayable', 'true')
-        li.setInfo(type="Video", infoLabels={"Title": caption})
+
+        # Set Info
+        if not info:
+            info = {}
+        info["title"] = caption
+        li.setInfo(type="Video", infoLabels=info)
+
+        # Add as Item
         xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]), url=url, listitem=li, isFolder=False)
 
     def addDirectory(self, folder, caption, image=None):
@@ -107,12 +122,19 @@ class AnimeAvenue(object):
         listitem = xbmcgui.ListItem(path=url)
         xbmcplugin.setResolvedUrl(handle=int(sys.argv[1]), succeeded=True, listitem=listitem)
 
-    def failResolve(self):
+    def failResolve(self, message=None):
         """
             Just fail :(
         """
         listitem = xbmcgui.ListItem(path="")
         xbmcplugin.setResolvedUrl(handle=int(sys.argv[1]), succeeded=False, listitem=listitem)
+
+        if message:
+            dialog = xbmcgui.Dialog()
+            ok = dialog.ok(strings['name'], message)
+
+    def getString(self, key):
+        return strings[key]
 
 
 aa = AnimeAvenue()

@@ -39,6 +39,6 @@ class StreamScanner(BasicScanner):
         return rtn
 
 if __name__ == "__main__":
-    gs = StreamScanner("darker-than-black", "episode", "2")
+    gs = StreamScanner("da-capo", "episode", "8")
     iframes = gs.run()
     print "%s" % iframes

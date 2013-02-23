@@ -1,10 +1,9 @@
 A small Plugin for XBMC allowing to browser AnimeAvenue
 
-
-
-* Installation:
-For example zip the plugin and install it in our xbmc
-
 * Requirements:
 python-requests (apt-get install python-requests)
+
+* Installation:
+For example zip the plugin (name it plugin.video.animeavenue.zip), move it to your xbmc and install it per lokal zip file
+
 

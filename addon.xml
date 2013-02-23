@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
         id="plugin.video.animeavenue"
-        version="1.0"
+        version="1.1"
         name="AnimeAvenue"
         provider-name="Martin Martimeo">
 
@@ -18,7 +18,7 @@
         <summary lang="de">Anime Videos von AnimeAvenue.net</summary>
         <summary lang="en">Anime streams from AnimeAvenue.net</summary>
         <description lang="en">
-            Provides AnimeAvenue.net browsable from your XBMC
+            Provides Episode from AnimeAvenue.net
         </description>
         <disclaimer lang="en">Videos from animeavenue.net</disclaimer>
     </extension>

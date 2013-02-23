@@ -13,7 +13,6 @@ __date__ = '03.02.13 - 11:28'
 
 
 def run(aa, tag=None, type=None, episode=None):
-
     if not tag:
         vs = AnimeScanner("http://www.animeavenue.net/anime-list/")
         animes = vs.run()
@@ -23,7 +22,8 @@ def run(aa, tag=None, type=None, episode=None):
         vs = EpisodeScanner(tag)
         animes = vs.run()
         for (tag, type, episode, anime) in animes:
-            aa.addVideo("anime/%s/%s/%s" % (tag, type, episode), anime)
+            aa.addVideo("anime/%s/%s/%s" % (tag, type, episode), anime,
+                        data={"episode": episode, "genre": "Anime"})
     else:
         try:
             if not episode:
@@ -36,7 +36,7 @@ def run(aa, tag=None, type=None, episode=None):
             else:
                 aa.failResolve()
         except NoContentProvided:
-            aa.failResolve()
+            aa.failResolve(aa.getString("no_video"))
 
 
 
