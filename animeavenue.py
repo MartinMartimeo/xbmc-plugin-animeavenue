@@ -16,15 +16,17 @@ import xbmc, xbmcplugin, xbmcgui, xbmcaddon
 
 # -- Constants ----------------------------------------------
 ADDON_ID = 'plugin.video.animeavenue'
-PLUGINDIR = xbmcaddon.getAddonInfo('path')
-RESOURCESDIR = os.path.join(PLUGINDIR, "resources")
-MEDIADIR = os.path.join(RESOURCESDIR, "media")
 
 # -- Settings -----------------------------------------------
 settings = xbmcaddon.Addon(id=ADDON_ID)
 
+# -- Pathes ----------------------------------------------
+PLUGINDIR = settings.getAddonInfo('path')
+RESOURCESDIR = os.path.join(PLUGINDIR, "resources")
+MEDIADIR = os.path.join(RESOURCESDIR, "media")
+
 # -- I18n ---------------------------------------------------
-language = xbmcaddon.Addon(id=ADDON_ID).getLocalizedString
+language = settings.getLocalizedString
 strings = {'latest_episodes': language(70010),
            'anime_suggestions': language(70020),
            'ongoing_series': language(70030),
@@ -33,7 +35,7 @@ strings = {'latest_episodes': language(70010),
            'name': language(10000),
            'no_video': language(50010),
            'suggestion_loading': language(50020),
-            'latest_loading': language(50030)}
+           'latest_loading': language(50030)}
 
 
 def get_params():
