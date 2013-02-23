@@ -3,6 +3,7 @@
 """
 
 """
+from resources.lib import storage
 from resources.scanner.AnimeScanner import AnimeScanner
 from resources.scanner.BasicScanner import NoContentProvided
 from resources.scanner.EpisodeScanner import EpisodeScanner
@@ -17,11 +18,17 @@ def run(aa, tag=None, type=None, episode=None):
         vs = AnimeScanner("http://www.animeavenue.net/anime-list/")
         animes = vs.run()
         for (tag, anime) in animes:
-            aa.addDirectory("anime/%s" % tag, anime)
+            # Image Present?
+            image = storage.get(tag)
+            # Add List Item
+            aa.addDirectory("anime/%s" % tag, anime, image=image)
     elif not type:
         vs = EpisodeScanner(tag)
-        animes = vs.run()
-        for (tag, type, episode, anime) in animes:
+        data = vs.run()
+        # Save Thumbernail
+        storage.set(tag, data['thumbnail'])
+        # Print Episodes
+        for (tag, type, episode, anime) in data['episodes']:
             aa.addVideo("anime/%s/%s/%s" % (tag, type, episode), anime,
                         info={"episode": episode, "genre": "Anime", "title": anime})
     else:

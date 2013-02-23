@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
         id="plugin.video.animeavenue"
-        version="1.1"
+        version="1.2"
         name="AnimeAvenue"
         provider-name="Martin Martimeo">
 
     <requires>
         <import addon="xbmc.python" version="2.0"/>
+        <import addon="script.common.plugin.cache" version="0.9.1"/>
     </requires>
 
     <extension point="xbmc.python.pluginsource" library="animeavenue.py">

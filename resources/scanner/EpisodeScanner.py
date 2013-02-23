@@ -18,18 +18,24 @@ class EpisodeScanner(BasicScanner):
         super(EpisodeScanner, self).__init__("http://www.animeavenue.net/category/%s/" % tag)
 
         self.re = re.compile(r'<div[\s\n\r]*class=[\'"]search-results[\'"][\s\n\r]*>[\s\n\r]*<a[\s\n\r]+href=[\'"][^\'">]+/([^\'">]+)-(\w+)-(\d+)/[\'"][\s\n\r]+rel=[\'"]bookmark[\'"][\s\n\r]*>(.+)&nbsp;<span>.*</span>[\s\n\r]*</a>[\s\n\r]*</div>')
+        self.thumbnail_re = re.compile(r'style=[\'"]float:left.*[\'"]><a[\s\n\r]*.*><img[\s\n\r]*src=[\'"]([^\'">]+)[\'"].*>')
 
     def parse(self, content):
         """
             Parses the request return
             :param content: Content from Request
         """
-        rtn = []
+        episodes = []
         matches = self.re.findall(content)
         for tag, type, episode, caption in matches:
-            rtn.append((tag, type, episode, caption))
-        rtn = sorted(rtn, key=lambda anime: "%s/%s" % (anime[1], anime[2].zfill(3)), reverse=False)
-        return rtn
+            episodes.append((tag, type, episode, caption))
+        episodes = sorted(episodes, key=lambda anime: "%s/%s" % (anime[1], anime[2].zfill(3)), reverse=False)
+        match = self.thumbnail_re.search(content)
+        if match:
+            thumbnail = match.group(1)
+        else:
+            thumbnail = None
+        return {'episodes': episodes, 'thumbnail': thumbnail}
 
 
 

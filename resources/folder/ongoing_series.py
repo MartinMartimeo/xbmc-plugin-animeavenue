@@ -3,6 +3,7 @@
 """
 
 """
+from resources.lib import storage
 from resources.scanner.OngoingAnimeScanner import OngoingAnimeScanner
 
 __author__ = 'MartinMartimeo <martin@martimeo.de>'
@@ -14,4 +15,7 @@ def run(aa):
     vs = OngoingAnimeScanner()
     animes = vs.run()
     for (tag, anime, time) in animes:
-        aa.addDirectory("anime/%s" % tag, anime)
+        # Image Present?
+        image = storage.get(tag)
+        # Add List Item
+        aa.addDirectory("anime/%s" % tag, anime, image=image)
