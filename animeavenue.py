@@ -3,7 +3,7 @@
 """
 
 """
-import urllib
+import os
 import urlparse
 import sys
 
@@ -16,6 +16,9 @@ import xbmc, xbmcplugin, xbmcgui, xbmcaddon
 
 # -- Constants ----------------------------------------------
 ADDON_ID = 'plugin.video.animeavenue'
+PLUGINDIR = xbmcaddon.getAddonInfo('path')
+RESOURCESDIR = os.path.join(PLUGINDIR, "resources")
+MEDIADIR = os.path.join(RESOURCESDIR, "media")
 
 # -- Settings -----------------------------------------------
 settings = xbmcaddon.Addon(id=ADDON_ID)
@@ -29,7 +32,8 @@ strings = {'latest_episodes': language(70010),
            'genres': language(70050),
            'name': language(10000),
            'no_video': language(50010),
-           'suggestion_loading': language(50020)}
+           'suggestion_loading': language(50020),
+            'latest_loading': language(50030)}
 
 
 def get_params():
@@ -52,13 +56,13 @@ class AnimeAvenue(object):
     def __init__(self):
         super(AnimeAvenue, self).__init__()
 
-    def addVideo(self, uri, caption, image=None, info=None):
+    def addVideo(self, uri, caption, image=None, icon=None, info=None):
         """
             Adds a Video Entry
             :param caption: Caption to be displayed
             :param uri: The folder uri
             :param image: The Thumbernail Image (optional)
-            :param label: Additional Label (optional)
+            :param icon: The Icon Image (optional)
             :param info: Additional Data passed to info (optional)
         """
         url = 'plugin://' + ADDON_ID + '/?folder=' + uri
@@ -67,6 +71,10 @@ class AnimeAvenue(object):
         else:
             li = xbmcgui.ListItem(caption)
         li.setProperty('IsPlayable', 'true')
+
+        # Set Icon
+        if icon:
+            li.setIconImage(icon)
 
         # Set Info
         if not info:
@@ -147,6 +155,10 @@ class AnimeAvenue(object):
 
         self.progress["dialog"].close()
         self.progress = None
+
+    def asMediaPath(self, path):
+
+        return os.path.join(MEDIADIR, path)
 
 
 aa = AnimeAvenue()

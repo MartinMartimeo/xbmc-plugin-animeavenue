@@ -30,6 +30,7 @@ def run(aa, tag=None, type=None, episode=None):
         # Print Episodes
         for (tag, type, episode, anime) in data['episodes']:
             aa.addVideo("anime/%s/%s/%s" % (tag, type, episode), anime,
+                        image=data['thumbnail'],
                         info={"episode": episode, "genre": "Anime", "title": anime})
     else:
         try:

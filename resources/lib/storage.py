@@ -3,6 +3,8 @@
 """
 
 """
+from animeavenue import ADDON_ID
+
 __author__ = 'MartinMartimeo <martin@martimeo.de>'
 __date__ = '23.02.13 - 22:37'
 
@@ -10,7 +12,7 @@ try:
     import StorageServer
 except:
     cache = None
-cache = StorageServer.StorageServer("plugin.video.animeavenue", 7200)
+cache = StorageServer.StorageServer(ADDON_ID, 7200)
 
 
 def get(key):
