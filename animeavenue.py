@@ -51,7 +51,7 @@ class AnimeAvenue(object):
     def __init__(self):
         super(AnimeAvenue, self).__init__()
 
-    def addVideo(self, uri, caption, image=None, label=None, info=None):
+    def addVideo(self, uri, caption, image=None, info=None):
         """
             Adds a Video Entry
             :param caption: Caption to be displayed
@@ -61,12 +61,8 @@ class AnimeAvenue(object):
             :param info: Additional Data passed to info (optional)
         """
         url = 'plugin://' + ADDON_ID + '/?folder=' + uri
-        if image and label:
-            li = xbmcgui.ListItem(caption, label, thumbnailImage=image)
-        elif image:
+        if image:
             li = xbmcgui.ListItem(caption, thumbnailImage=image)
-        elif label:
-            li = xbmcgui.ListItem(caption, label)
         else:
             li = xbmcgui.ListItem(caption)
         li.setProperty('IsPlayable', 'true')
@@ -74,7 +70,6 @@ class AnimeAvenue(object):
         # Set Info
         if not info:
             info = {}
-        info["title"] = caption
         li.setInfo(type="Video", infoLabels=info)
 
         # Add as Item
@@ -92,6 +87,7 @@ class AnimeAvenue(object):
             li = xbmcgui.ListItem(caption, thumbnailImage=image)
         else:
             li = xbmcgui.ListItem(caption)
+        li.setInfo({'SortLetter': caption[0]})
         xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]), url=url, listitem=li, isFolder=True)
 
 

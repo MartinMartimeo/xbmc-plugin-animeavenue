@@ -14,4 +14,5 @@ def run(aa):
     vs = LatestEpisodesScanner()
     animes = vs.run()
     for (tag, (type, kind), episode, anime) in animes:
-        aa.addVideo("anime/%s/%s/%s" % (tag, type, episode), anime, label="(%s)" % kind)
+        aa.addVideo("anime/%s/%s/%s" % (tag, type, episode), "%s Episode %s (%s)" % (anime, episode, kind),
+                    data={"episode": episode, "genre": "Anime (%s)" % kind, "title": anime})
