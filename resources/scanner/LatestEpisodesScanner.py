@@ -5,6 +5,7 @@
 """
 import re
 from resources.scanner.BasicScanner import BasicScanner
+from resources.scanner.EpisodeScanner import EpisodeScanner
 
 __author__ = 'MartinMartimeo <martin@martimeo.de>'
 __date__ = '03.02.13 - 10:51'
@@ -37,3 +38,6 @@ if __name__ == "__main__":
     animes = gs.run()
     for (tag, (type, kind), episode, anime) in animes:
         print "Anime: %s / Type: %s / Kind: %s / Episode: %s / Titel: %s" % (tag, type, kind, episode, anime)
+        vs = EpisodeScanner(tag)
+        image = vs.run()["thumbnail"]
+        print "Image: %s" % image

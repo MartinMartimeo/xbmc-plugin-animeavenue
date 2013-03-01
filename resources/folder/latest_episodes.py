@@ -4,6 +4,7 @@
 
 """
 from resources.lib import storage
+from resources.scanner.BasicScanner import NoContentProvided
 from resources.scanner.EpisodeScanner import EpisodeScanner
 from resources.scanner.LatestEpisodesScanner import LatestEpisodesScanner
 
@@ -21,8 +22,11 @@ def run(aa):
         # Load Image
         image = storage.get(tag)
         if not image:
-            vs = EpisodeScanner(tag)
-            image = vs.run()["thumbnail"]
+            try:
+                vs = EpisodeScanner(tag)
+                image = vs.run()["thumbnail"]
+            except NoContentProvided:
+                image = None
         aa.addVideo("anime/%s/%s/%s" % (tag, type, episode), "%s Episode %s" % (anime, episode),
                     image=image,
                     icon=aa.asMediaPath('%s.png' % kind),

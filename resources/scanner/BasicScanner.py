@@ -4,6 +4,7 @@
 
 """
 import requests
+from requests import HTTPError
 
 __author__ = 'MartinMartimeo <martin@martimeo.de>'
 __date__ = '03.02.13 - 08:52'
@@ -36,7 +37,10 @@ class BasicScanner(object):
 
     def run(self):
 
-        self.fetch()
+        try:
+            self.fetch()
+        except HTTPError as e:
+            raise NoContentProvided(e)
         if self.data:
             return self.data
         raise NoContentProvided("No Content Provided")
