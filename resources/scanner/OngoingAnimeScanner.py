@@ -13,11 +13,15 @@ URL = "http://www.animeavenue.net/ongoing-series/"
 
 
 class OngoingAnimeScanner(BasicScanner):
+    """
+        Scan ongoing animes
+    """
 
     def __init__(self):
         super(OngoingAnimeScanner, self).__init__(URL)
 
-        self.re = re.compile(r'<li>[\s\n\r]*<a[\s\n\r]+href=[\'"][^\'">]+/category/([^\'">]+)/[\'"]>(.+)</a>[\s\n\r]*(\d*\:\d*\s*(?:am|pm))[\s\n\r]*.*</li>')
+        self.re = re.compile(
+            r'<li>[\s\n\r]*<a[\s\n\r]+href=[\'"][^\'">]+/category/([^\'">]+)/[\'"]>(.+)</a>[\s\n\r]*(\d*\:\d*\s*(?:am|pm))?[\s\n\r]*.*</li>')
 
     def parse(self, content):
         """
@@ -30,7 +34,6 @@ class OngoingAnimeScanner(BasicScanner):
             rtn.append((tag, caption, time))
         rtn = sorted(rtn, key=lambda anime: anime[1])
         return rtn
-
 
 
 if __name__ == "__main__":

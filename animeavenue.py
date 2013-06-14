@@ -6,6 +6,7 @@
 import os
 import urlparse
 import sys
+from resources.scanner.BasicScanner import NoContentProvided
 
 __author__ = 'MartinMartimeo <martin@martimeo.de>'
 __date__ = '03.02.13 - 08:36'
@@ -100,7 +101,6 @@ class AnimeAvenue(object):
             li = xbmcgui.ListItem(caption)
         xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]), url=url, listitem=li, isFolder=True)
 
-
     def showFolder(self, folder):
         """
             Shows a folder
@@ -112,7 +112,10 @@ class AnimeAvenue(object):
         resources_module = __import__("resources.folder.%s" % arg)
         folder_module = getattr(resources_module, "folder")
         arg_module = getattr(folder_module, arg)
-        arg_module.run(self, *args[1:])
+        try:
+            arg_module.run(self, *args[1:])
+        except NoContentProvided:
+            aa.failResolve()
 
     def showRootDirectory(self):
         """

@@ -13,3 +13,5 @@ version 1.2
 
 version 1.3
   * Fix for when module storage server is not found
+  * BugFix when animeavenue format changes to not trigger exception in log
+  * Fix Ongoing Anime List
