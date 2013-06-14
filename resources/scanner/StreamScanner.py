@@ -11,13 +11,12 @@ __author__ = 'MartinMartimeo <martin@martimeo.de>'
 __date__ = '03.02.13 - 11:37'
 
 
-
-
 class StreamScanner(BasicScanner):
     def __init__(self, tag, type, episode):
         super(StreamScanner, self).__init__("http://www.animeavenue.net/%s-%s-%s/" % (tag, type, episode))
 
-        self.re = re.compile(r'(?:<div[\s\n\r]*class=[\'"]entry.*[\'"].*>[\s\n\r]*<p>|<div[\s\n\r]*class=[\'"]postTabs_divs.*[\'"].*>[\s\n\r]*<span[\s\n\r]*.*>.*(?:<br[\s\n\r]*/>)?)[\s\n\r]*<iframe[\s\n\r]*[^>]*(?:SRC|src)=[\'"]([^\'">]+)[\'"][^>]*>')
+        self.re = re.compile(
+            r'(?:<div[\s\n\r]*class=[\'"]entry.*[\'"].*>[\s\n\r]*<p>|<div[\s\n\r]*class=[\'"]postTabs_divs.*[\'"].*>[\s\n\r]*<span[\s\n\r]*.*>.*(?:<br[\s\n\r]*/>)?)[\s\n\r]*<iframe[\s\n\r]*[^>]*(?:SRC|src)=[\'"]([^\'">]+)[\'"][^>]*>')
 
     def parse(self, content):
         """
@@ -33,12 +32,13 @@ class StreamScanner(BasicScanner):
                 rtn.extend(mp.run())
             except NoContentProvided:
                 continue
-            # Just Loop until a mp4/flv/avi has been found
+                # Just Loop until a mp4/flv/avi has been found
             if rtn:
                 break
         return rtn
 
+
 if __name__ == "__main__":
-    gs = StreamScanner("da-capo", "episode", "8")
+    gs = StreamScanner("darker-than-black", "episode", "3")
     iframes = gs.run()
     print "%s" % iframes

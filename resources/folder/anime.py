@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- encoding: utf-8 -*-
 """
-
+    Handler for showing an anime list
 """
 from resources.lib import storage
 from resources.scanner.AnimeScanner import AnimeScanner
@@ -14,19 +14,22 @@ __date__ = '03.02.13 - 11:28'
 
 
 def run(aa, tag=None, type=None, episode=None):
+    """
+        Show an Anime List
+    """
     if not tag:
         vs = AnimeScanner("http://www.animeavenue.net/anime-list/")
         animes = vs.run()
         for (tag, anime) in animes:
             # Image Present?
-            image = storage.get(tag)
+            image = storage.cget(tag)
             # Add List Item
             aa.addDirectory("anime/%s" % tag, anime, image=image)
     elif not type:
         vs = EpisodeScanner(tag)
         data = vs.run()
         # Save Thumbernail
-        storage.set(tag, data['thumbnail'])
+        storage.cset(tag, data['thumbnail'])
         # Print Episodes
         for (tag, type, episode, anime) in data['episodes']:
             aa.addVideo("anime/%s/%s/%s" % (tag, type, episode), anime,

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- encoding: utf-8 -*-
 """
-
+    Implements a cache get and cache set value and uses storageserver if available
 """
 from resources import ADDON_ID
 
@@ -10,12 +10,13 @@ __date__ = '23.02.13 - 22:37'
 
 try:
     import StorageServer
+
+    cache = StorageServer.StorageServer(ADDON_ID, 7200)
 except:
     cache = None
-cache = StorageServer.StorageServer(ADDON_ID, 7200)
 
 
-def get(key):
+def cget(key):
     """
     Get a String from Cache
     :param key:
@@ -27,7 +28,7 @@ def get(key):
     return cache.get(key)
 
 
-def set(key, value):
+def cset(key, value):
     """
     Set a String from Cache
     :param key:

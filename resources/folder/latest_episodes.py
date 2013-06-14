@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- encoding: utf-8 -*-
 """
-
+    Handler for Latest Episodes
 """
 from resources.lib import storage
 from resources.scanner.BasicScanner import NoContentProvided
@@ -13,6 +13,9 @@ __date__ = '03.02.13 - 11:07'
 
 
 def run(aa):
+    """
+        Show Latest Episodes
+    """
 
     vs = LatestEpisodesScanner()
     animes = vs.run()
@@ -20,7 +23,7 @@ def run(aa):
     for (tag, (type, kind), episode, anime) in animes:
         aa.incrProgress()
         # Load Image
-        image = storage.get(tag)
+        image = storage.cget(tag)
         if not image:
             try:
                 vs = EpisodeScanner(tag)
