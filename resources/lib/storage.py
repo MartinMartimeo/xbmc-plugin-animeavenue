@@ -12,8 +12,10 @@ try:
     import StorageServer
 
     cache = StorageServer.StorageServer(ADDON_ID, 7200)
-except:
-    cache = None
+except ImportError:
+    StorageServer = None
+
+    cache = {}
 
 
 def cget(key):
@@ -22,9 +24,16 @@ def cget(key):
     :param key:
     :return:
     """
-    if not cache:
+
+    # None
+    if cache is None:
         return None
 
+    # Dict
+    if isinstance(cache, dict):
+        return key in cache and cache[key] or None
+
+    # StorageServer
     return cache.get(key)
 
 
@@ -34,9 +43,16 @@ def cset(key, value):
     :param key:
     :return:
     """
-    if not cache:
+
+    # None
+    if cache is None:
         return None
 
+    # Dict
+    if isinstance(cache, dict):
+        cache[key] = value
+
+    # StorageServer
     return cache.set(key, value)
 
 
