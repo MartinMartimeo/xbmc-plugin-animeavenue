@@ -59,25 +59,33 @@ class AnimeAvenue(object):
     def __init__(self):
         super(AnimeAvenue, self).__init__()
 
-    def addVideo(self, uri, caption, image=None, icon=None, info=None):
+    def addVideo(self, uri, caption, label=None, image=None, icon=None, info=None):
         """
             Adds a Video Entry
             :param caption: Caption to be displayed
+            :param label: Additional label to be displayed
             :param uri: The folder uri
             :param image: The Thumbernail Image (optional)
             :param icon: The Icon Image (optional)
             :param info: Additional Data passed to info (optional)
         """
         url = 'plugin://' + ADDON_ID + '/?folder=' + uri
-        if image:
+        if image and icon:
+            li = xbmcgui.ListItem(caption, thumbnailImage=image, iconImage=icon)
+        elif image:
             li = xbmcgui.ListItem(caption, thumbnailImage=image)
+        elif icon:
+            li = xbmcgui.ListItem(caption, iconImage=icon)
         else:
             li = xbmcgui.ListItem(caption)
         li.setProperty('IsPlayable', 'true')
 
-        # Set Icon
-        if icon:
-            li.setIconImage(icon)
+        # Label2
+        if label:
+            if label.startswith("[") and label.endswith("]"):
+                li.setLabel2(label)
+            else:
+                li.setLabel2("[%s]" % label)
 
         # Set Info
         if not info:

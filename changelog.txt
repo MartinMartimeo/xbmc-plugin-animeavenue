@@ -20,3 +20,4 @@ version 1.4
   * Emulate cache module if no StorageServer can be found
   * Be a little bit more descriptive in addon.xml
   * Use addon urlresolver to resolve video pages that do not expose directly the stream url
+  * Show sub/raw in latest episodes

@@ -10,9 +10,7 @@ __author__ = 'MartinMartimeo <martin@martimeo.de>'
 __date__ = '03.02.13 - 10:05'
 
 
-
 def run(aa, genre=None):
-
     if not genre:
         gs = GenreScanner()
         genres = gs.run()
@@ -22,5 +20,5 @@ def run(aa, genre=None):
         vs = GenreAnimeScanner("http://www.animeavenue.net/?genre=%s" % genre)
         animes = vs.run()
         for (img, tag, anime) in animes:
-            aa.addDirectory("anime/%s" % tag, anime, image=img)
+            aa.addDirectory("anime/%s" % tag, anime, icon=img)
 

@@ -21,11 +21,13 @@ def run(aa):
     aa.setProgress(max=len(animes), title=aa.getString('suggestion_loading'))
     for (tag, anime, img) in animes:
         aa.incrProgress()
+
         # Load Image
         image = storage.cget(tag)
         if not image:
             vs = EpisodeScanner(tag)
             image = vs.run()["thumbnail"]
-            # Add List Item
+
+        # Add List Item
         aa.addDirectory("anime/%s" % tag, anime, image=image)
     aa.closeProgress()

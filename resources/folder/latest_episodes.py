@@ -33,5 +33,6 @@ def run(aa):
         aa.addVideo("anime/%s/%s/%s" % (tag, type, episode), "%s Episode %s" % (anime, episode),
                     image=image,
                     icon=aa.asMediaPath('%s.png' % kind),
+                    label="[%s]" % kind,
                     info={"episode": episode, "genre": "Anime (%s)" % kind, "title": anime})
     aa.closeProgress()
