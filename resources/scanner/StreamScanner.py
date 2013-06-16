@@ -12,9 +12,21 @@ __date__ = '03.02.13 - 11:37'
 
 
 class StreamScanner(BasicScanner):
+    """
+        Scans thorugh the streams of an episode and tries to extract video urls
+    """
+
     def __init__(self, tag, type, episode):
         super(StreamScanner, self).__init__("http://www.animeavenue.net/%s-%s-%s/" % (tag, type, episode))
 
+        # Module urlresolver
+        try:
+            import urlresolver
+        except ImportError:
+            urlresolver = None
+        self.urlresolver = urlresolver
+
+        # Our Regex
         self.re = re.compile(
             r'(?:<div[\s\n\r]*class=[\'"]entry.*[\'"].*>[\s\n\r]*<p>|<div[\s\n\r]*class=[\'"]postTabs_divs.*[\'"].*>[\s\n\r]*<span[\s\n\r]*.*>.*(?:<br[\s\n\r]*/>)?)[\s\n\r]*<iframe[\s\n\r]*[^>]*(?:SRC|src)=[\'"]([^\'">]+)[\'"][^>]*>')
 
@@ -27,18 +39,28 @@ class StreamScanner(BasicScanner):
         matches = self.re.findall(content)
         for url in matches:
             mp = VideoScanner(url)
+
             # Try to add video url
             try:
                 rtn.extend(mp.run())
             except NoContentProvided:
                 continue
-                # Just Loop until a mp4/flv/avi has been found
+
+            # Just Loop until a mp4/flv/avi has been found
             if rtn:
                 break
+
+            # Try urlresolver
+            if self.urlresolver is not None:
+                mp = self.urlresolver.resolve(url)
+                if mp:
+                    rtn.extend(mp)
+                    break
+
         return rtn
 
 
 if __name__ == "__main__":
-    gs = StreamScanner("darker-than-black", "episode", "3")
+    gs = StreamScanner("to-aru-majutsu-no-index", "episode", "1")
     iframes = gs.run()
     print "%s" % iframes

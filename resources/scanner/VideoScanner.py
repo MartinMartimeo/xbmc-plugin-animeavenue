@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- encoding: utf-8 -*-
 """
-
+    Provides scanner for resolving video urls on a page
 """
 import re
 from resources.scanner.BasicScanner import BasicScanner
@@ -10,8 +10,11 @@ __author__ = 'MartinMartimeo <martin@martimeo.de>'
 __date__ = '11.02.13 - 18:06'
 
 
-
 class Mp4Scanner(BasicScanner):
+    """
+        Looks for mp4 on a page
+    """
+
     def __init__(self, url):
         super(Mp4Scanner, self).__init__(url)
 
@@ -28,7 +31,12 @@ class Mp4Scanner(BasicScanner):
             rtn.append(url)
         return rtn
 
+
 class AviScanner(BasicScanner):
+    """
+        Looks for avi on a page
+    """
+
     def __init__(self, url):
         super(AviScanner, self).__init__(url)
 
@@ -45,7 +53,12 @@ class AviScanner(BasicScanner):
             rtn.append(url)
         return rtn
 
+
 class FlvScanner(BasicScanner):
+    """
+        Looks for flv on a page
+    """
+
     def __init__(self, url):
         super(FlvScanner, self).__init__(url)
 
@@ -62,7 +75,12 @@ class FlvScanner(BasicScanner):
             rtn.append(url)
         return rtn
 
+
 class VideoScanner(Mp4Scanner, AviScanner, FlvScanner):
+    """
+        Mixes mp4,avi,flv scanner
+    """
+
     def __init__(self, url):
         super(VideoScanner, self).__init__(url)
 
