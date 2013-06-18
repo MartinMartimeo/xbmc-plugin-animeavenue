@@ -51,6 +51,7 @@ def cset(key, value):
     # Dict
     if isinstance(cache, dict):
         cache[key] = value
+        return True
 
     # StorageServer
     return cache.set(key, value)
