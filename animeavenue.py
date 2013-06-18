@@ -59,6 +59,23 @@ class AnimeAvenue(object):
     def __init__(self):
         super(AnimeAvenue, self).__init__()
 
+    def createListItem(self, caption, image, icon):
+        """
+            Create an xbmcgui.Lisitem
+            :param caption: Caption of Item
+            :param image: The Thumbernail Image (optional)
+            :param icon: The Icon Image (optional)
+        """
+        if image and icon:
+            li = xbmcgui.ListItem(caption, thumbnailImage=image, iconImage=icon)
+        elif image:
+            li = xbmcgui.ListItem(caption, thumbnailImage=image)
+        elif icon:
+            li = xbmcgui.ListItem(caption, iconImage=icon)
+        else:
+            li = xbmcgui.ListItem(caption)
+        return li
+
     def addVideo(self, uri, caption, label=None, image=None, icon=None, info=None):
         """
             Adds a Video Entry
@@ -70,14 +87,7 @@ class AnimeAvenue(object):
             :param info: Additional Data passed to info (optional)
         """
         url = 'plugin://' + ADDON_ID + '/?folder=' + uri
-        if image and icon:
-            li = xbmcgui.ListItem(caption, thumbnailImage=image, iconImage=icon)
-        elif image:
-            li = xbmcgui.ListItem(caption, thumbnailImage=image)
-        elif icon:
-            li = xbmcgui.ListItem(caption, iconImage=icon)
-        else:
-            li = xbmcgui.ListItem(caption)
+        li = self.createListItem(caption=caption, image=image, icon=icon)
         li.setProperty('IsPlayable', 'true')
 
         # Label2
@@ -95,18 +105,16 @@ class AnimeAvenue(object):
         # Add as Item
         xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]), url=url, listitem=li, isFolder=False)
 
-    def addDirectory(self, folder, caption, image=None):
+    def addDirectory(self, folder, caption, image=None, icon=None):
         """
             Adds a Directory
             :param caption: Caption to be displayed
             :param folder: The folder uri
             :param image: The Thumbernail Image (optional)
+            :param icon: The Icon Image (optional)
         """
         url = 'plugin://' + ADDON_ID + '/?folder=' + folder
-        if image:
-            li = xbmcgui.ListItem(caption, thumbnailImage=image)
-        else:
-            li = xbmcgui.ListItem(caption)
+        li = self.createListItem(caption=caption, image=image, icon=icon)
         xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]), url=url, listitem=li, isFolder=True)
 
     def showFolder(self, folder):
