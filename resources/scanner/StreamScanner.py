@@ -52,15 +52,15 @@ class StreamScanner(BasicScanner):
 
             # Try urlresolver
             if self.urlresolver is not None:
-                mp = self.urlresolver.resolve(url)
-                if mp:
-                    rtn.extend(mp)
+                stream_url = self.urlresolver.resolve(url)
+                if stream_url:
+                    rtn.append(stream_url)
                     break
 
         return rtn
 
 
 if __name__ == "__main__":
-    gs = StreamScanner("to-aru-majutsu-no-index", "episode", "1")
+    gs = StreamScanner("seto-no-hanayome", "episode", "1")
     iframes = gs.run()
     print "%s" % iframes
