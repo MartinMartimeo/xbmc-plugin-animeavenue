@@ -18,7 +18,7 @@ def run(aa):
 
     vs = SuggestionScanner()
     animes = vs.run()
-    aa.setProgress(max=len(animes), title=aa.getString('suggestion_loading'))
+    aa.setProgress(maxval=len(animes), title=aa.getString('suggestion_loading'))
     for (tag, anime, img) in animes:
         aa.incrProgress()
 

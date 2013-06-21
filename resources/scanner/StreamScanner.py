@@ -11,6 +11,10 @@ __author__ = 'MartinMartimeo <martin@martimeo.de>'
 __date__ = '03.02.13 - 11:37'
 
 
+class UpcomingEpisode(NoContentProvided):
+    pass
+
+
 class StreamScanner(BasicScanner):
     """
         Scans thorugh the streams of an episode and tries to extract video urls
@@ -57,10 +61,13 @@ class StreamScanner(BasicScanner):
                     rtn.append(stream_url)
                     break
 
+        if not rtn and "/upcoming.jpg" in content:
+            raise UpcomingEpisode()
+
         return rtn
 
 
 if __name__ == "__main__":
-    gs = StreamScanner("seto-no-hanayome", "episode", "1")
+    gs = StreamScanner("to-aru-kagaku-no-railgun-s", "episode", "11")
     iframes = gs.run()
     print "%s" % iframes

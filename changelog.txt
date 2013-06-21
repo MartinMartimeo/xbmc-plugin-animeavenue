@@ -21,3 +21,8 @@ version 1.4
   * Be a little bit more descriptive in addon.xml
   * Use addon urlresolver to resolve video pages that do not expose directly the stream url
   * Show sub/raw in latest episodes
+
+version 1.5
+  * Code cleanup
+  * Fix language ids
+  * Detect upcomding episode

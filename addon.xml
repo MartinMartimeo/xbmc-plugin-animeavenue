@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
         id="plugin.video.animeavenue"
-        version="1.4"
+        version="1.5"
         name="AnimeAvenue"
         provider-name="Martin Martimeo">
 
@@ -26,7 +26,7 @@
         </description>
         <disclaimer lang="en">
             This plugin is just a proxy to AnimeAvenue.net to be handy and free to use.
-            Please do not bother AnimeAvenue Admins with questions to this plugin, use github issues
+            Please do not inquery AnimeAvenue Admins with questions to this plugin, use github issues for this plugin
         </disclaimer>
         <source>https://github.com/MartinMartimeo/xbmc-plugin-animeavenue</source>
     </extension>

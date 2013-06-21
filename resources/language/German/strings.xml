@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <strings>
-    <string id="10000">AnimeAvenue</string>
+    <string id="30000">AnimeAvenue</string>
 
-    <string id="50010">Es konnte kein Video gefunden werden</string>
-    <string id="50020">Lade Vorschläge</string>
-    <string id="50030">Lade Folgen</string>
+    <string id="30110">Es konnte kein Video gefunden werden</string>
+    <string id="30120">Die aktuelle Episode ist noch nicht online</string>
 
-    <string id="70010">Aktuelle Folgen</string>
-    <string id="70020">Vorschläge</string>
-    <string id="70030">Aktuelle Animes</string>
-    <string id="70040">Anime Liste</string>
-    <string id="70050">Genres</string>
+    <string id="30210">Lade Vorschläge</string>
+    <string id="30220">Lade Folgen</string>
 
-    <string id="70510">Adventure</string>
-    <string id="70520">Romance</string>
-    <string id="70530">Comedy</string>
-    <string id="70540">Action</string>
-    <string id="70550">School Life</string>
+    <string id="30410">Aktuelle Folgen</string>
+    <string id="30420">Vorschläge</string>
+    <string id="30430">Aktuelle Animes</string>
+    <string id="30440">Animes</string>
+    <string id="30450">Genres</string>
 </strings>

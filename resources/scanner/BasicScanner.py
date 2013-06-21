@@ -9,11 +9,12 @@ from requests import HTTPError
 __author__ = 'MartinMartimeo <martin@martimeo.de>'
 __date__ = '03.02.13 - 08:52'
 
+
 class NoContentProvided(Exception):
     pass
 
-class BasicScanner(object):
 
+class BasicScanner(object):
     def __init__(self, url):
         self.url = url
         self.data = []

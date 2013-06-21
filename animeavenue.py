@@ -28,18 +28,22 @@ MEDIADIR = os.path.join(RESOURCESDIR, "media")
 
 # -- I18n ---------------------------------------------------
 language = settings.getLocalizedString
-strings = {'latest_episodes': language(70010),
-           'anime_suggestions': language(70020),
-           'ongoing_series': language(70030),
-           'anime_list': language(70040),
-           'genres': language(70050),
-           'name': language(10000),
-           'no_video': language(50010),
-           'suggestion_loading': language(50020),
-           'latest_loading': language(50030)}
+strings = {'latest_episodes': language(30410),
+           'anime_suggestions': language(30420),
+           'ongoing_series': language(30430),
+           'anime_list': language(30440),
+           'genres': language(30450),
+           'name': language(30000),
+           'no_video': language(30110),
+           'upcoming_episode': language(30120),
+           'suggestion_loading': language(30210),
+           'latest_loading': language(30220)}
 
 
 def get_params():
+    """
+        Parse parameters from url
+    """
     paramstring = sys.argv[2]
     params = urlparse.parse_qs(urlparse.urlparse(paramstring).query)
 
@@ -53,7 +57,7 @@ params = get_params()
 
 class AnimeAvenue(object):
     """
-
+        Main Class providing all the bindings to xbmc/xbmcgui
     """
 
     def __init__(self):
@@ -100,7 +104,7 @@ class AnimeAvenue(object):
         # Set Info
         if not info:
             info = {}
-        li.setInfo(type="Video", infoLabels=info)
+        li.setInfo("video", infoLabels=info)
 
         # Add as Item
         xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]), url=url, listitem=li, isFolder=False)
@@ -161,24 +165,37 @@ class AnimeAvenue(object):
     def getString(self, key):
         return strings[key]
 
-    def setProgress(self, max, title):
+    def setProgress(self, maxval, title):
+        """
+            Show a Dialog Progress
 
+            :param maxval: Absolute maximum value
+            :param title: Title of Dialog
+        """
         dialog = xbmcgui.DialogProgress()
         dialog.create(self.getString('name'), title)
-        self.progress = {"value": 0, "max": max, "dialog": dialog}
+        self.progress = {"value": 0, "max": maxval, "dialog": dialog}
 
-    def incrProgress(self, title=None):
-
+    def incrProgress(self):
+        """
+            Increase absolute value of current dialog progress
+        """
         self.progress["value"] += 1
         self.progress["dialog"].update(self.progress["value"] * 100 / self.progress["max"])
 
     def closeProgress(self):
-
+        """
+            Close current dialog progress
+        """
         self.progress["dialog"].close()
         self.progress = None
 
     def asMediaPath(self, path):
+        """
+            Create path relative to media dir
 
+            :param path: relative path from media root
+        """
         return os.path.join(MEDIADIR, path)
 
 

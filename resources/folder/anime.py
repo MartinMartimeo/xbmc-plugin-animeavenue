@@ -7,7 +7,7 @@ from resources.lib import storage
 from resources.scanner.AnimeScanner import AnimeScanner
 from resources.scanner.BasicScanner import NoContentProvided
 from resources.scanner.EpisodeScanner import EpisodeScanner
-from resources.scanner.StreamScanner import StreamScanner
+from resources.scanner.StreamScanner import StreamScanner, UpcomingEpisode
 
 __author__ = 'MartinMartimeo <martin@martimeo.de>'
 __date__ = '03.02.13 - 11:28'
@@ -46,6 +46,8 @@ def run(aa, tag=None, type=None, episode=None):
                 aa.resolveUrl(streams[0])
             else:
                 aa.failResolve()
+        except UpcomingEpisode:
+            aa.failResolve(aa.getString("upcoming_episode"))
         except NoContentProvided:
             aa.failResolve(aa.getString("no_video"))
 

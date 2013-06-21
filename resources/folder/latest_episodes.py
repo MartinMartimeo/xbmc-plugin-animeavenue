@@ -19,7 +19,7 @@ def run(aa):
 
     vs = LatestEpisodesScanner()
     animes = vs.run()
-    aa.setProgress(max=len(animes), title=aa.getString('latest_loading'))
+    aa.setProgress(maxval=len(animes), title=aa.getString('latest_loading'))
     for (tag, (type, kind), episode, anime) in animes:
         aa.incrProgress()
         # Load Image
@@ -34,5 +34,5 @@ def run(aa):
                     image=image,
                     icon=aa.asMediaPath('%s.png' % kind),
                     label="[%s]" % kind,
-                    info={"episode": episode, "genre": "Anime (%s)" % kind, "title": anime})
+                    info={"episode": episode, "status": kind, "genre": "Anime", "title": anime})
     aa.closeProgress()
