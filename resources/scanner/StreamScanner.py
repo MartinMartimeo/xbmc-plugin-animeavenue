@@ -41,6 +41,15 @@ class StreamScanner(BasicScanner):
         """
         rtn = []
         matches = self.re.findall(content)
+
+        # Try urlresolver
+        if self.urlresolver is not None:
+            source = self.urlresolver.choose_source([self.urlresolver.HostedMediaFile(url=url) for url in matches])
+            if source:
+                rtn.append(source.resolve())
+                return rtn
+
+        # Try own approach
         for url in matches:
             mp = VideoScanner(url)
 
@@ -53,13 +62,6 @@ class StreamScanner(BasicScanner):
             # Just Loop until a mp4/flv/avi has been found
             if rtn:
                 break
-
-            # Try urlresolver
-            if self.urlresolver is not None:
-                stream_url = self.urlresolver.resolve(url)
-                if stream_url:
-                    rtn.append(stream_url)
-                    break
 
         if not rtn and "/upcoming.jpg" in content:
             raise UpcomingEpisode()
