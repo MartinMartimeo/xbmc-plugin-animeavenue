@@ -68,6 +68,6 @@ class StreamScanner(BasicScanner):
 
 
 if __name__ == "__main__":
-    gs = StreamScanner("to-aru-kagaku-no-railgun-s", "episode", "11")
+    gs = StreamScanner("darker-than-black", "episode", "20")
     iframes = gs.run()
     print "%s" % iframes

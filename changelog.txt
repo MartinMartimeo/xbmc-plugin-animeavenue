@@ -25,4 +25,5 @@ version 1.4
 version 1.5
   * Code cleanup
   * Fix language ids
-  * Detect upcomding episode
+  * Detect upcoming episode
+  * Make stream url regex less greedy

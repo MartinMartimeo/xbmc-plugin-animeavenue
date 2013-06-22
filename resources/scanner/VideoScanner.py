@@ -18,7 +18,7 @@ class Mp4Scanner(BasicScanner):
     def __init__(self, url):
         super(Mp4Scanner, self).__init__(url)
 
-        self.mp4re = re.compile(r'(http://.+\.\w{2,3}.*/.+\.mp4[^\"\'\.]*)')
+        self.mp4re = re.compile(r'(http://[^<>\"\']+\.\w{2,3}[^<>\"\']*/[^<>\"\']+\.mp4[^\"\'\.]*)')
 
     def parse(self, content):
         """
@@ -40,7 +40,7 @@ class AviScanner(BasicScanner):
     def __init__(self, url):
         super(AviScanner, self).__init__(url)
 
-        self.avire = re.compile(r'(http://.+\.\w{2,3}.*/.+\.avi[^\"\'\.]*)')
+        self.avire = re.compile(r'(http://[^<>\"\']+\.\w{2,3}[^<>\"\']*/[^<>\"\']+\.avi[^\"\'\.]*)')
 
     def parse(self, content):
         """
@@ -62,7 +62,7 @@ class FlvScanner(BasicScanner):
     def __init__(self, url):
         super(FlvScanner, self).__init__(url)
 
-        self.flvre = re.compile(r'(http://.+\.\w{2,3}.*/.+\.flv[^\"\'\.]*)')
+        self.flvre = re.compile(r'(http://[^<>\"\']+\.\w{2,3}[^<>\"\']*/[^<>\"\']+\.flv[^\"\'\.]*)')
 
     def parse(self, content):
         """
