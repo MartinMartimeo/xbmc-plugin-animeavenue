@@ -23,13 +23,6 @@ class StreamScanner(BasicScanner):
     def __init__(self, tag, type, episode):
         super(StreamScanner, self).__init__("http://www.animeavenue.net/%s-%s-%s/" % (tag, type, episode))
 
-        # Module urlresolver
-        try:
-            import urlresolver
-        except ImportError:
-            urlresolver = None
-        self.urlresolver = urlresolver
-
         # Our Regex
         self.re = re.compile(
             r'(?:<div[\s\n\r]*class=[\'"]entry.*[\'"].*>[\s\n\r]*<p>|<div[\s\n\r]*class=[\'"]postTabs_divs.*[\'"].*>[\s\n\r]*<span[\s\n\r]*.*>.*(?:<br[\s\n\r]*/>)?)[\s\n\r]*<iframe[\s\n\r]*[^>]*(?:SRC|src)=[\'"]([^\'">]+)[\'"][^>]*>')
@@ -43,11 +36,15 @@ class StreamScanner(BasicScanner):
         matches = self.re.findall(content)
 
         # Try urlresolver
-        if self.urlresolver is not None:
-            source = self.urlresolver.choose_source([self.urlresolver.HostedMediaFile(url=url) for url in matches])
-            if source:
-                rtn.append(source.resolve())
-                return rtn
+        import urlresolver
+
+        sources = [urlresolver.HostedMediaFile(url=url) for url in matches]
+        for source in urlresolver.filter_source_list(sources):
+            web_url = source.resolve()
+            if web_url:
+                rtn.append(web_url)
+        if rtn:
+            return rtn
 
         # Try own approach
         for url in matches:
@@ -70,6 +67,6 @@ class StreamScanner(BasicScanner):
 
 
 if __name__ == "__main__":
-    gs = StreamScanner("darker-than-black", "episode", "20")
+    gs = StreamScanner("zetsuen-no-tempest", "episode", "20")
     iframes = gs.run()
     print "%s" % iframes
